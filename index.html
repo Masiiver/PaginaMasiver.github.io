@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masiver Diseños - Artista Digital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--body-background-color);
+            background-image: var(--body-pattern);
+        }
+
+        header {
+            background-color: var(--header-background-color);
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        nav {
+            background-color: #444;
+            color: #fff;
+            text-align: center;
+            padding: 0.5em;
+        }
+
+        section {
+            padding: 2em;
+        }
+
+        .art-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .art-piece {
+            margin: 1em;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            width: 300px; /* Ancho del contenedor de la pieza de arte */
+            background-color: var(--image-background-color);
+            background-image: var(--image-pattern);
+        }
+
+        .art-piece img {
+            max-width: 55%; /* La imagen no superará el ancho del contenedor */
+            height: auto; /* Mantiene la proporción original */
+            display: block; /* Evita espacios en blanco debajo de las imágenes */
+        }
+
+        .art-piece:hover {
+            transform: scale(1.1);
+        }
+
+        .art-details {
+            background-color: var(--random-color);
+            background-image: var(--random-pattern);
+            padding: 10px;
+            text-align: center;
+        }
+
+        :root {
+            --body-background-color: var(--random-color); /* Color predeterminado */
+            --body-pattern: var(--random-pattern); /* Patrón predeterminado */
+            --header-background-color: var(--random-color); /* Color predeterminado */
+            --random-color: #000; /* Color predeterminado */
+            --random-pattern: url(''); /* Patrón predeterminado */
+            --image-background-color: var(--random-color); /* Color predeterminado */
+            --image-pattern: var(--random-pattern); /* Patrón predeterminado */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Función para generar colores aleatorios en formato hexadecimal
+            function getRandomColor() {
+                return '#' + Math.floor(Math.random()*16777215).toString(16);
+            }
+
+            // Función para generar un patrón aleatorio (solo como ejemplo)
+            function getRandomPattern() {
+                const patterns = [
+                    'url("pattern1.jpg")',
+                    'url("pattern2.jpg")',
+                    // Agrega más patrones según sea necesario
+                ];
+                const randomIndex = Math.floor(Math.random() * patterns.length);
+                return patterns[randomIndex];
+            }
+
+            // Aplicar color y patrón aleatorio a las variables CSS
+            document.documentElement.style.setProperty('--body-background-color', getRandomColor());
+            document.documentElement.style.setProperty('--body-pattern', getRandomPattern());
+            document.documentElement.style.setProperty('--header-background-color', getRandomColor());
+            document.documentElement.style.setProperty('--random-color', getRandomColor());
+            document.documentElement.style.setProperty('--random-pattern', getRandomPattern());
+            document.documentElement.style.setProperty('--image-background-color', getRandomColor());
+            document.documentElement.style.setProperty('--image-pattern', getRandomPattern());
+        });
+    </script>
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Masiver Diseños - Artista Digital</h1>
+    </header>
+
+    <nav>
+        <a href="#2d">Arte 2D</a> | <a href="#3d">Arte 3D</a>
+    </nav>
+
+    <section id="2d">
+        <h2>Arte 2D</h2>
+        <div class="art-container">
+            <!-- Imágenes 2D con detalles -->
+            <div class="art-piece">
+                <img src="E:/PAGINA WEB/Dibujos/Dibujo Michelle.png" alt="Arte 2D 1">
+                <div class="art-details">
+                    <h3>Dibujo Pj juego</h3>
+                    <p> Exploro la armonía entre lo etéreo y lo urbano: 
+                        una musa pelirroja
+                        misteriosa tras la luna dorada,danza en la noche
+                        ciudad luminosa como telón de fondo.</p>
+                </div>
+            </div>
+            <div class="art-piece">
+                <img src="E:/PAGINA WEB/Dibujos/PJ Juego ambiente.png" alt="Arte 2D 2">
+                <div class="art-details">
+                    <h3>Pj Juego Ambiente 2D 2</h3>
+                    <p>En tierras habitadas por monstruos, una valiente heroína de 
+                        cabello rojo navega entre ciudades de piedra. 
+                        Un juego de aventuras que fusiona lo fantástico y lo épico.</p>
+                </div>
+            </div>    
+            <div class="art-piece">
+                <img src="E:/PAGINA WEB/Dibujos/Veridiana Zephyra 2.png" alt="Arte 2D 3">
+                <div class="art-details">
+                    <h3>Verdiana Zephyra</h3>
+                    <p> Retrato de una maga de la naturaleza: su pelo verde como el follaje
+                        ojos reflejando la esencia de la vida. 
+                        Flores danzan a su alrededor, encantando con la magia natural.</p>  
+                    </div>
+            </div>        
+            <div class="art-piece">
+                <img src="E:/PAGINA WEB/Dibujos/Luminia Gemarosa.png" alt="Arte 2D 4">
+                <div class="art-details">
+                        <h3>Luminia Gemarosa</h3>
+                        <p> La musa de la belleza, cabello rosa como pétalos, 
+                             ojos de cristal que reflejan su divinidad.
+                             Rodeada de diamantes, es la diosa de las piedras preciosas, una visión celestial.</p>  
+                        </div>        
+                    </div>
+                    
+            </div>
+            <!-- Agrega más imágenes 2D según sea necesario -->
+        </div>
+    </section>
+
+    <section id="3d">
+        <h2>Arte 3D</h2>
+        <div class="art-container">
+            <!-- Imágenes 3D con detalles -->
+            <div class="art-piece">
+                <img src="E:/PAGINA WEB/Objetos/Tp.Integrador.fbx" alt="Arte 3D 1">
+                <div class="art-details">
+                    <h3>Modelo de Juego 2</h3>
+                    <p>En el modelo 3D, un esqueleto cobra vida con huesos radiantes en amarillo.
+                        Su presencia evoca un aura única, desafiando la muerte 
+                        con un toque visual distintivo y misterioso</p>
+                </div>
+            </div>
+            <!-- Agrega más imágenes 3D según sea necesario -->
+        </div>
+    </section>
+
+
+     <script>
+    function toggleDetails(element) {
+        // Alternar la clase "active" para cambiar la opacidad
+        element.classList.toggle('active');
+
+        // Asegurarse de que otros elementos no tengan la clase "active"
+        const allArtPieces = document.querySelectorAll('.art-piece');
+        allArtPieces.forEach(function (artPiece) {
+            if (artPiece !== element && artPiece.classList.contains('active')) {
+                artPiece.classList.remove('active');
+            }
+        });
+    }
+     </script>
+
+</body>
+</html>
