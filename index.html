@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,13 +21,6 @@
             padding: 1em;
         }
 
-        nav {
-            background-color: #444;
-            color: #fff;
-            text-align: center;
-            padding: 0.5em;
-        }
-
         section {
             padding: 2em;
         }
@@ -43,15 +37,34 @@
             position: relative;
             cursor: pointer;
             transition: transform 0.3s ease-in-out;
-            width: 300px; /* Ancho del contenedor de la pieza de arte */
+            width: calc(33.33% - 2em); /* Calcula el ancho para tres elementos en una fila */
+            background-color: var(--image-background-color);
+            background-image: var(--image-pattern);
+        }
+        .art-piece:nth-child(3n+1) {
+            margin-left: 0; /* Reinicia el margen izquierdo en cada fila */
+        }
+
+        .art-piece img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .art-piece {
+            margin: 1em;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            width: 300px;
             background-color: var(--image-background-color);
             background-image: var(--image-pattern);
         }
 
         .art-piece img {
-            max-width: 85%; /* La imagen no superará el ancho del contenedor */
-            height: auto; /* Mantiene la proporción original */
-            display: block; /* Evita espacios en blanco debajo de las imágenes */
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
         .art-piece:hover {
@@ -65,17 +78,54 @@
             text-align: center;
         }
 
-        :root {
-            --body-background-color: var(--random-color); /* Color predeterminado */
-            --body-pattern: var(--random-pattern); /* Patrón predeterminado */
-            --header-background-color: var(--random-color); /* Color predeterminado */
-            --random-color: #000; /* Color predeterminado */
-            --random-pattern: url(''); /* Patrón predeterminado */
-            --image-background-color: var(--random-color); /* Color predeterminado */
-            --image-pattern: var(--random-pattern); /* Patrón predeterminado */
+        .art-piece.full-size {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            cursor: zoom-out;
+            background-color: rgba(0, 0, 0, 0.7);
         }
-       /* Estilo 3D para el título "Masiver Diseños" */
-       header h1 {
+
+        .art-piece.full-size img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            background-color: transparent;
+        }
+        .bottom-link {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        .empty {
+            height: 20px; /* Ajusta la altura según sea necesario */
+            margin-bottom: 10px; /* Ajusta el margen inferior según sea necesario */
+            background-color: transparent;
+        }
+         .program-info {
+             margin-top: auto; /* Empuja hacia la parte inferior */
+             padding: 10px; /* Ajusta el relleno según sea necesario */
+             background-color: transparent; /* Ajusta el color de fondo según sea necesario */
+             color: #ffffff; /* Ajusta el color del texto según sea necesario */
+        }
+        :root {
+            --body-background-color: var(--random-color);
+            --body-pattern: var(--random-pattern);
+            --header-background-color: var(--random-color);
+            --random-color: #000;
+            --random-pattern: url('');
+            --image-background-color: transparent;
+            --image-pattern: var(--random-pattern);
+        }
+
+        header h1 {
             text-transform: uppercase;
             font-size: 2em;
             letter-spacing: 5px;
@@ -84,10 +134,9 @@
         }
 
         header h1:hover {
-            color: var(--random-color); /* Cambiar a un color específico al pasar el mouse */
+            color: var(--random-color);
         }
 
-        /* Espacio de derechos reservados y contacto */
         footer {
             background-color: #444;
             color: #fff;
@@ -98,156 +147,342 @@
             width: 100%;
         }
 
-        /* Estilo para el bloque de información personal */
-        #informacion-personal {
-            margin-top: 20px;
-            font-size: 0.8em; /* Tamaño de texto reducido */
-            padding: 10px; /* Espaciado interno del rectángulo */
-            border: 2px solid #ccc; /* Borde del rectángulo */
-            border-radius: 5px; /* Bordes redondeados del rectángulo */
-            background-color: #f9f9f9; /* Color de fondo del rectángulo */
+        .hidden-section {
+            display: none;
         }
 
-        #informacion-personal h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+        .sidebar {
+            position: fixed;
+            left: -160px;
+            top: 0;
+            height: 100%;
+            width: 200px;
+            background-color: var(--random-color);
+            padding-top: 1em;
+            text-align: center;
+            color: #030000;
+            z-index: 1;
+            overflow: auto;
+            transition: left 0.3s ease-in-out;
         }
 
-        #informacion-personal p {
-            margin-bottom: 5px;
+        .sidebar:hover {
+            left: 0;
         }
-        
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #555555;
+        }
+
+        .sidebar a.suggest-changes {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .video-piece {
+            width: 70%; /* Ajusta el ancho según sea necesario */
+            margin: 1em;
+        }
+
+        .video-piece iframe {
+            width: 100%;
+            height: 80%;
+        }   
     </style>
+    <script src="https://threejs.org/build/three.module.js"></script>
+    <script src="https://threejs.org/examples/jsm/controls/OrbitControls.js"></script>
+    <script src="https://threejs.org/examples/jsm/loaders/FBXLoader.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Función para generar colores aleatorios en formato hexadecimal
+        document.addEventListener('DOMContentLoaded', function () {
             function getRandomColor() {
-                return '#' + Math.floor(Math.random()*16777215).toString(16);
+                return '#' + Math.floor(Math.random() * 16777215).toString(16);
             }
 
-            // Función para generar un patrón aleatorio (solo como ejemplo)
             function getRandomPattern() {
                 const patterns = [
-                    'url("pattern1.jpg")',
-                    'url("pattern2.jpg")',
+                    'https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Pagina/Fondo%201.jpg("Fondo 1.jpg")',
+                    'https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Pagina/Fondo%202.png("Fondo 2.jpg")',
                     // Agrega más patrones según sea necesario
                 ];
                 const randomIndex = Math.floor(Math.random() * patterns.length);
                 return patterns[randomIndex];
             }
 
-            // Aplicar color y patrón aleatorio a las variables CSS
             document.documentElement.style.setProperty('--body-background-color', getRandomColor());
             document.documentElement.style.setProperty('--body-pattern', getRandomPattern());
             document.documentElement.style.setProperty('--header-background-color', getRandomColor());
             document.documentElement.style.setProperty('--random-color', getRandomColor());
             document.documentElement.style.setProperty('--random-pattern', getRandomPattern());
-            document.documentElement.style.setProperty('--image-background-color', getRandomColor());
+            document.documentElement.style.setProperty('--image-background-color', 'transparent');
             document.documentElement.style.setProperty('--image-pattern', getRandomPattern());
         });
 
         function toggleDetails(element) {
-    // Alternar la clase "active" para cambiar la opacidad y escala
-    element.classList.toggle('active');
+            element.classList.toggle('active');
 
-    // Asegurarse de que otros elementos no tengan la clase "active"
-    const allArtPieces = document.querySelectorAll('.art-piece');
-    allArtPieces.forEach(function (artPiece) {
-        if (artPiece !== element && artPiece.classList.contains('active')) {
-            artPiece.classList.remove('active');
+            const allArtPieces = document.querySelectorAll('.art-piece');
+            allArtPieces.forEach(function (artPiece) {
+                if (artPiece !== element && artPiece.classList.contains('active')) {
+                    artPiece.classList.remove('active');
+                }
+            });
         }
-    });
-}
-</script>
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('hidden-section');
+        }
+
+        let scrollPosition = 0;
+
+        function rememberScrollPosition() {
+            scrollPosition = window.scrollY;
+        }
+
+        function restoreScrollPosition() {
+            window.scrollTo(0, scrollPosition);
+        }
+
+        function toggleImageSize(element) {
+            element.classList.toggle('full-size');
+            if (element.classList.contains('full-size')) {
+                rememberScrollPosition();
+            } else {
+                restoreScrollPosition();
+            }
+        }
     </script>
-    </style>
+</head>
+    </script>
 </head>
 <body>
+
+    <div class="sidebar">
+        <a href="#2d">Arte 2D</a>
+        <a href="#3d" onclick="toggleSection('3d')">Arte 3D</a>
+        <a href="#videos" onclick="toggleSection('videos')">Videos</a>
+        
+        <!-- Información sobre programas usados -->
+        <div class="program-info">
+            <strong>Programas usados:</strong>
+            <span>Adobe Photoshop, Illustrator, Premier, Paint Tool SAI, Krita, AutoCAD, entre otros</span>
+        </div>
+        
+        <a href="mailto:joaquin2209cabral@gmail.com" class="bottom-link">Sugerir cambios</a>
+    </div>
 
     <header>
         <h1>Masiver Diseños - Artista Digital</h1>
     </header>
 
-    <nav>
-        <a href="#2d">Arte 2D</a> | <a href="#3d">Arte 3D</a>
-    </nav>
     <section id="2d">
         <h2>Arte 2D</h2>
         <div class="art-container">
-            <div class="art-piece" onclick="toggleDetails(this)">
+            <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
                 <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Dibujo%20Michelle.png" alt="Arte 2D 1">
                 <div class="art-details">
                     <h3>Dibujo Pj juego</h3>
-                    <p> Exploro la armonía entre lo etéreo y lo urbano: 
+                    <p> Exploro la armonía entre lo etéreo y lo urbano:
                         una musa pelirroja
                         misteriosa tras la luna dorada, danza en la noche
                         ciudad luminosa como telón de fondo.</p>
                 </div>
             </div>
-            <div class="art-piece" onclick="toggleDetails(this)">
-                <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/PJ%20Juego%20ambiente.png" alt="Arte 2D 2">
-                <div class="art-details">
-                    <h3>Pj Juego Ambiente 2D 2</h3>
-                    <p>En tierras habitadas por monstruos, una valiente heroína de 
-                        cabello rojo navega entre ciudades de piedra. 
-                        Un juego de aventuras que fusiona lo fantástico y lo épico.</p>
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                    <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/1%20Prueba.png" alt="Arte 2D 1">
+                    <div class="art-details">
+                        <h3>El Rey de las Sombras</h3>
+                        <p> Un enemigo formidable emerge del velo de la oscuridad, su cabello blanco 
+                            como la luna llena fluye en cascadas etéreas.
+                             Vestido con capas sombrías que danzan con cada movimiento, su mirada intensa 
+                             refleja el dominio sobre las sombras
+                             y su presencia exuda un aura de misterio y poder.</p>
+                    </div>
                 </div>
-            </div>    
-            <div class="art-piece" onclick="toggleDetails(this)">
-                <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Veridiana%20Zephyra%202.png" alt="Arte 2D 3">
-                <div class="art-details">
-                    <h3>Verdiana Zephyra</h3>
-                    <p> Retrato de una maga de la naturaleza: su pelo verde como el follaje
-                        ojos reflejando la esencia de la vida. 
-                        Flores danzan a su alrededor, encantando con la magia natural.</p>  
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                        <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Boceto%20Juego.png" alt="Arte 2D 1">
+                        <div class="art-details">
+                            <h3>Boceto de Plataformas Fantásticas</h3>
+                            <p> En un mundo de maravillas y desafíos, un boceto cobra vida. El protagonista
+                                 inspirado en el estilo de Hollow Knight, se aventura por un paisaje onírico lleno de 
+                                 lataformas intrincadas y criaturas extraordinarias..</p>
+                        </div>
+                    </div> 
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                            <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Creatyre%203.png" alt="Arte 2D 1">
+                            <div class="art-details">
+                                <h3>Dragón del Alma y Rayos</h3>
+                                <p> Una creatura única se manifiesta: su cabeza es la de un majestuoso dragón,
+                                         pero su esencia es una pequeña alma luminosa. 
+                                    Rayos de energía se entrelazan a su alrededor, formando una danza etérea. </p>
+                            </div>
+                        </div>               
+
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                    <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/PJ%20Juego%20ambiente.png" alt="Arte 2D 2">
+                    <div class="art-details">
+                        <h3>Pj Juego Ambiente 2D 2</h3>
+                        <p>En tierras habitadas por monstruos, una valiente heroína de
+                            cabello rojo navega entre ciudades de piedra.
+                            Un juego de aventuras que fusiona lo fantástico y lo épico.</p>
+                    </div>
                 </div>
-            </div>        
-            <div class="art-piece" onclick="toggleDetails(this)">
-                <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Luminia%20Gemarosa.png" alt="Arte 2D 4">
-                <div class="art-details">
-                    <h3>Luminia Gemarosa</h3>
-                    <p> La musa de la belleza, cabello rosa como pétalos, 
-                         ojos de cristal que reflejan su divinidad.
-                         Rodeada de diamantes, es la diosa de las piedras preciosas, una visión celestial.</p>  
-                </div>        
-            </div>
+
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                        <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Dreamy%202.png" alt="Arte 2D 1">
+                        <div class="art-details">
+                            <h3>Ciudad Oculta de Piedra</h3>
+                            <p> Entre las sombras, se revela una civilización avanzada en una ciudad oculta de piedra. 
+                                Rascacielos de arquitectura intrincada se alzan en harmonía con tecnología futurista
+                                creando un paisaje urbano que mezcla lo antiguo y lo moderno en un abrazo armonioso.</p>
+                        </div>
+                    </div>
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                            <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Dreamy.png" alt="Arte 2D 1">
+                            <div class="art-details">
+                                <h3>Paseo Nocturno en la Ciudad</h3>
+                                <p> En el oscuro corazón de la ciudad, una figura montada a caballo rompe la monotonía. 
+                                    La luz tenue ilumina su camino mientras navega por callejones sombríos. 
+                                    El contraste entre la oscuridad y la figura misteriosa agrega un toque de intriga a la escena urbana.</p>
+                            </div>
+                        </div>
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                                <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Fondo.png" alt="Arte 2D 1">
+                                <div class="art-details">
+                                    <h3>Chica de Pelo Rojo en la Metrópolis</h3>
+                                    <p> Una joven de cabello rojo destaca en el horizonte de una ciudad bulliciosa. 
+                                        Dos imponentes rascacielos flanquean su presencia, mientras la ciudad extiende sus brazos llenos 
+                                        de casas en un reflejo moderno  y vibrante que evoca la esencia de Tokio.</p>
+                                </div>
+                            </div> 
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                                <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/M....png" alt="Arte 2D 4">
+                                <div class="art-details">
+                                    <h3>Estilo Suave de los 70</h3>
+                                    <p> LUna chica de pelo rojo irradia un encanto retro en un estilo de cómic de los años 70. 
+                                        Las líneas suaves y colores nostálgicos crean una imagen que evoca la sensación clásica de 
+                                        las historietas de esa época, un tributo a la estética atemporal.</p>
+                                </div>
+                            </div>                    
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                    <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Veridiana%20Zephyra%202.png" alt="Arte 2D 3">
+                    <div class="art-details">
+                        <h3>Verdiana Zephyra</h3>
+                        <p> Retrato de una maga de la naturaleza: su pelo verde como el follaje
+                            ojos reflejando la esencia de la vida.
+                            Flores danzan a su alrededor, encantando con la magia natural.</p>
+                    </div>
+                </div>
+                <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                    <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Luminia%20Gemarosa.png" alt="Arte 2D 4">
+                    <div class="art-details">
+                        <h3>Luminia Gemarosa</h3>
+                        <p> La musa de la belleza, cabello rosa como pétalos,
+                            ojos de cristal que reflejan su divinidad.
+                            Rodeada de diamantes, es la diosa de las piedras preciosas, una visión celestial.</p>
+                    </div>
+                </div>            
+            <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                    <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Patito%20(2).png" alt="Arte 2D 4">
+                    <div class="art-details">
+                        <h3>Pato Superhéroe del Río Paraná</h3>
+                        <p> Desde las aguas del Paraná emerge un pato intrépido. 
+                            Ataviado con una capa ondeante y una máscara audaz 
+                            este superhéroe emplumado defiende su hábitat con valentía.</p>
+                    </div>
+                </div>
+            <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                    <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Patito.png" alt="Arte 2D 4">
+                    <div class="art-details">
+                        <h3>Patito Amarillo entre las Piedras</h3>
+                        <p> En un entorno natural, un patito amarillo chapotea entre piedras y plantas con alegría contagiosa. 
+                            La luz resalta su plumaje radiante, y su expresión feliz añade un 
+                            toque de inocencia a este rincón encantador de la naturaleza.</p>
+                    </div>
+                </div>
+                               
+            <!-- Agrega más elementos de arte 2D según sea necesario -->
         </div>
     </section>
 
-    <section id="3d">
+    <section id="3d" class="hidden-section">
         <h2>Arte 3D</h2>
         <div class="art-container">
-            <!-- Imágenes 3D con detalles -->
-            <div class="art-piece">
-                <img src="E:/PAGINA WEB/Objetos/Tp.Integrador.fbx" alt="Arte 3D 1">
+            <!-- Nuevo elemento con imagen PNG y contenido descargable -->
+            <div class="art-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                <img src="https://raw.githubusercontent.com/Masiiver/PaginaMasiver.github.io/main/Dibujos/Imagen%20Esqueleto.PNG" alt="Arte 3D">
                 <div class="art-details">
                     <h3>Modelo de Juego 2</h3>
                     <p>En el modelo 3D, un esqueleto cobra vida con huesos radiantes en amarillo.
-                        Su presencia evoca un aura única, desafiando la muerte 
+                        Su presencia evoca un aura única, desafiando la muerte
                         con un toque visual distintivo y misterioso</p>
+                    <!-- Enlace para contenido descargable desde GitHub -->
+                    <a href="https://github.com/Masiiver/PaginaMasiver.github.io/blob/main/Objetos/Tp.Integrador.fbx  " target="_blank">ObjetoDescargable</a>
                 </div>
             </div>
-            <!-- Agrega más imágenes 3D según sea necesario -->
+            <!-- Otros elementos existentes o nuevos según sea necesario -->
         </div>
     </section>
+                </div>
+            </div>
+        </div>
+            <!-- Agrega más elementos de arte 3D según sea necesario -->
+        </div>
+    </section>
+
+    <section id="videos" class="hidden-section">
+        <h2>Videos</h2>
+        <div class="video-container">
+            <div class="video-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                <iframe width="70%" height="70%" src="https://drive.google.com/file/d/1FGobhQd5by1PyTpmjagXRRhBmpJ6uR1E/preview" frameborder="0" allowfullscreen></iframe>
+                <div class="art-details">
+                    <h3>Video de Arte 3D</h3>
+                </div>
+            </div>
+            <div class="video-piece" onclick="toggleDetails(this); toggleImageSize(this);">
+                <iframe width="70%" height="70%" src="https://drive.google.com/file/d/17H-OT9DUFXs0zvs1cPG0ZFEHCyLjMPq_/preview" frameborder="0" allowfullscreen></iframe>
+                <div class="art-details">
+                    <h3>Video de Arte 3D</h3>
+                </div>
+            </div>
+            <div class="video-piece">
+                <iframe width="70%" height="70%" src="https://www.youtube.com/embed/gn5ohTrB830" frameborder="0" allowfullscreen></iframe>
+                <div class="art-details">
+                    <h3>Video de YouTube</h3>
+                </div>
+            </div>
+            <!-- Agrega más elementos de video según sea necesario -->
+        </div>
+            
+    </section>
+
     <footer>
         <p>Todos los derechos reservados a su creador, Daniel Cabral</p>
         <p>Contacto: <a href="mailto:joaquin2209cabral@gmail.com">joaquin2209cabral@gmail.com</a> | Teléfono: +3437522353</p>
     </footer>
 
-    <script>
-   function toggleDetails(element) {
-       // Alternar la clase "active" para cambiar la opacidad
-       element.classList.toggle('active');
+</body>
 
-       // Asegurarse de que otros elementos no tengan la clase "active"
-       const allArtPieces = document.querySelectorAll('.art-piece');
-       allArtPieces.forEach(function (artPiece) {
-           if (artPiece !== element && artPiece.classList.contains('active')) {
-               artPiece.classList.remove('active');
-           }
-       });
-   }
+</html>
     </script>
 
 </body>
