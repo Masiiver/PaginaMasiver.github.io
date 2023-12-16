@@ -138,7 +138,7 @@
         }
 
         footer {
-            background-color: #444;
+            background-color: #4d0303;
             color: #fff;
             text-align: center;
             padding: 3m;
@@ -153,7 +153,7 @@
 
         .sidebar {
             position: fixed;
-            left: -160px;
+            left: -200px;
             top: 0;
             height: 100%;
             width: 200px;
@@ -192,16 +192,42 @@
             text-decoration: none;
             transition: background-color 0.3s;
         }
+        .close-sidebar-btn {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .close-sidebar-btn:hover {
+          background-color: #777;
+        }
         .video-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+        }
+        .sidebar.show-sidebar {
+            left: 0; /* Muestra la barra lateral cuando la clase show-sidebar está presente */
+        }
+        .menu-icon {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
         }
 
         .video-piece {
             width: 70%; /* Ajusta el ancho según sea necesario */
             margin: 1em;
         }
+
 
         .video-piece iframe {
             width: 100%;
@@ -270,26 +296,39 @@
                 restoreScrollPosition();
             }
         }
-    </script>
-</head>
+        function toggleSidebar() {
+         console.log('Toggling sidebar');
+          var sidebar = document.querySelector('.sidebar');
+          sidebar.classList.toggle('show-sidebar');
+        }
+
+          document.querySelector('.menu-icon').addEventListener('click', toggleSidebar);
+
+         document.querySelector('.close-sidebar-btn').addEventListener('click', function () {
+          console.log('Closing sidebar');
+            var sidebar = document.querySelector('.sidebar');
+            if (sidebar.classList.contains('show-sidebar')) {
+            sidebar.classList.remove('show-sidebar');
+        }
+        });
     </script>
 </head>
 <body>
+
+    <div class="menu-icon" onclick="toggleSidebar()">☰</div>  
 
     <div class="sidebar">
         <a href="#2d">Arte 2D</a>
         <a href="#3d" onclick="toggleSection('3d')">Arte 3D</a>
         <a href="#videos" onclick="toggleSection('videos')">Videos</a>
-        
-        <!-- Información sobre programas usados -->
         <div class="program-info">
             <strong>Programas usados:</strong>
-            <span>Adobe Photoshop, Illustrator, Premier, Paint Tool SAI, Krita, AutoCAD, entre otros</span>
+            <span>Adobe Photoshop, Illustrator, Premier, Paint Tool SAI, Krita, AutoCAD, entre otros</span>   
+        <div class="close-sidebar-btn" onclick="toggleSidebar()">Cerrar Barra</div>     
         </div>
         
         <a href="mailto:joaquin2209cabral@gmail.com" class="bottom-link">Sugerir cambios</a>
     </div>
-
     <header>
         <h1>Masiver Diseños - Artista Digital</h1>
     </header>
@@ -476,14 +515,22 @@
     </section>
 
     <footer>
-        <p>Todos los derechos reservados a su creador, Daniel Cabral</p>
-        <p>Contacto: <a href="mailto:joaquin2209cabral@gmail.com">joaquin2209cabral@gmail.com</a> | Teléfono: +3437522353</p>
+        <div class="footer-container">
+            <div class="contact-info">
+                <h4>Contacto</h4>
+                <p>Email: <a href="mailto:joaquin2209cabral@gmail.com">joaquin2209cabral@gmail.com</a></p>
+                <p>Teléfono: +3437522353</p>
+            </div>
+            <div class="social-media">
+                <h4>Redes Sociales</h4>
+                <!-- Agrega enlaces a tus redes sociales -->
+                <a href="https://www.linkedin.com/in/daniel-joaquin-cabral-3b8b9b234/" target="_blank">Linkedin</a>
+                <a href="https://twitter.com/VtuMasive" target="_blank">Twitter</a>
+                <a href="https://github.com/Masiiver" target="_blank">Github</a>
+                <!-- Agrega más redes sociales según sea necesario -->
+            </div>
+        </div>
+        <p class="copyright">© 2023 Masiver Diseños - Todos los derechos reservados a su creador, Daniel Cabral</p>
     </footer>
-
-</body>
-
-</html>
-    </script>
-
 </body>
 </html>
